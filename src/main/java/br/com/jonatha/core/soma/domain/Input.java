@@ -18,7 +18,6 @@
         private Double output;
 
         public Input (){
-
         }
 
         public Input(Double input) {

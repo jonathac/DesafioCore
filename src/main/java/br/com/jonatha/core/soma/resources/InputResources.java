@@ -3,12 +3,12 @@ package br.com.jonatha.core.soma.resources;
 import br.com.jonatha.core.soma.domain.Input;
 import br.com.jonatha.core.soma.dto.InputDTO;
 import br.com.jonatha.core.soma.service.InputService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class InputResources {
     InputService service;
 
     //CREATE
+    @ApiOperation("Inserir transiação")
     @PostMapping()
     public ResponseEntity<Input> create(@RequestBody InputDTO objDto) {
         Input obj = service.fromDto(objDto);
@@ -32,6 +33,7 @@ public class InputResources {
     }
 
     //READ
+    @ApiOperation("Buscar transição por ID")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         Optional<Input> obj = service.findById(id);
@@ -41,6 +43,7 @@ public class InputResources {
         return ResponseEntity.ok().body(obj.get());
     }
 
+    @ApiOperation("Buscar todas as transições")
     @GetMapping()
     public ResponseEntity<List<Input>> findAll() {
         List<Input> list = new ArrayList<>();
@@ -49,6 +52,7 @@ public class InputResources {
     }
 
     //UPDATE
+    @ApiOperation("Atualizar transação por ID")
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id,@RequestBody InputDTO objDto) {
         Input obj = service.fromDto(objDto);
@@ -61,6 +65,7 @@ public class InputResources {
     }
 
     //DELETE
+    @ApiOperation("Excluir transição por ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         if (service.findById(id).isEmpty()) {
