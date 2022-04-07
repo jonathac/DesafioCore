@@ -38,11 +38,11 @@ public class ResourceExceptionHandler {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
-    
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<StandardError> validationInput(HttpMessageNotReadableException e, HttpServletRequest request) {
 
-        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), "e.getMessage()", System.currentTimeMillis());
+        StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 }
